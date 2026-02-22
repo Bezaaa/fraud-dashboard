@@ -33,8 +33,12 @@ const field = (
 );
 
 const inputCls =
-  "w-full px-3 py-2 rounded-lg border text-sm text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-colors";
-const inputStyle = { background: "var(--bg, #07070f)", borderColor: "var(--border)", color: "white" };
+  "w-full px-3 py-2 rounded-xl border text-sm focus:outline-none transition-all";
+const inputStyle = {
+  background: "var(--surface)",
+  borderColor: "var(--border-strong)",
+  color: "var(--fg)",
+};
 
 export default function TransactionForm({ onResult }: Props) {
   const [form, setForm] = useState<TransactionInput>(defaultValues);
@@ -170,7 +174,7 @@ export default function TransactionForm({ onResult }: Props) {
         type="submit"
         disabled={loading}
         className="w-full py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 transition-opacity disabled:opacity-60"
-        style={{ background: "var(--primary)", color: "white" }}
+        style={{ background: "linear-gradient(135deg, var(--primary), var(--cyan))", color: "white", boxShadow: "0 4px 20px var(--primary-glow)" }}
       >
         {loading ? <><Loader2 size={16} className="animate-spin" /> Analyzing…</> : "Analyze Transaction"}
       </button>

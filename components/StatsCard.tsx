@@ -1,35 +1,48 @@
+"use client";
+import { motion } from "framer-motion";
+
 interface StatsCardProps {
   title: string;
   value: string;
   sub: string;
-  color: "indigo" | "green" | "red" | "yellow";
+  accent: "purple" | "cyan" | "red" | "green" | "yellow";
   icon: React.ReactNode;
+  index?: number;
 }
 
-const colorMap = {
-  indigo: { bg: "rgba(99,102,241,0.08)", border: "rgba(99,102,241,0.25)", text: "#6366f1" },
-  green:  { bg: "rgba(34,197,94,0.08)",  border: "rgba(34,197,94,0.25)",  text: "#22c55e" },
-  red:    { bg: "rgba(239,68,68,0.08)",  border: "rgba(239,68,68,0.25)",  text: "#ef4444" },
-  yellow: { bg: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.25)", text: "#f59e0b" },
+const accentMap = {
+  purple: { color: "var(--primary)", glow: "var(--primary-glow)" },
+  cyan:   { color: "var(--cyan)",    glow: "var(--cyan-glow)"    },
+  red:    { color: "var(--red)",     glow: "var(--red-glow)"     },
+  green:  { color: "var(--green)",   glow: "var(--green-glow)"   },
+  yellow: { color: "var(--yellow)",  glow: "var(--yellow-glow)"  },
 };
 
-export default function StatsCard({ title, value, sub, color, icon }: StatsCardProps) {
-  const c = colorMap[color];
+export default function StatsCard({ title, value, sub, accent, icon, index = 0 }: StatsCardProps) {
+  const { color, glow } = accentMap[accent];
+
   return (
-    <div
-      className="rounded-xl border p-5 flex flex-col gap-3"
-      style={{ background: "var(--card)", borderColor: "var(--border)" }}
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.08, duration: 0.4 }}
+      className="glow-card p-5 flex flex-col gap-4"
     >
-      <div className="flex items-center justify-between">
-        <span className="text-sm" style={{ color: "var(--muted)" }}>{title}</span>
-        <div className="p-2 rounded-lg border" style={{ background: c.bg, borderColor: c.border, color: c.text }}>
+      <div className="flex items-start justify-between">
+        <p className="text-sm font-medium" style={{ color: "var(--muted)" }}>{title}</p>
+        <div
+          className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+          style={{ background: glow, color, border: `1px solid ${color}30` }}
+        >
           {icon}
         </div>
       </div>
       <div>
-        <p className="text-3xl font-bold text-white">{value}</p>
-        <p className="text-xs mt-1" style={{ color: "var(--muted)" }}>{sub}</p>
+        <p className="text-3xl font-bold tracking-tight" style={{ color: "var(--fg)" }}>{value}</p>
+        <p className="text-xs mt-1.5 font-medium" style={{ color: "var(--muted)" }}>{sub}</p>
       </div>
-    </div>
+      {/* Bottom accent bar */}
+      <div className="h-0.5 rounded-full" style={{ background: `linear-gradient(90deg, ${color}, transparent)` }} />
+    </motion.div>
   );
 }
