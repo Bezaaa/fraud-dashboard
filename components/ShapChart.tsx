@@ -34,7 +34,7 @@ export default function ShapChart({ values }: ShapChartProps) {
             type="category"
             dataKey="name"
             width={110}
-            tick={{ fill: "var(--foreground)", fontSize: 12 }}
+            tick={{ fill: "var(--fg)", fontSize: 12 }}
             axisLine={false}
             tickLine={false}
           />
@@ -49,7 +49,7 @@ export default function ShapChart({ values }: ShapChartProps) {
           />
           <Bar dataKey="impact" radius={[0, 4, 4, 0]}>
             {data.map((entry, i) => (
-              <Cell key={i} fill={entry.impact >= 0 ? "#ef4444" : "#22c55e"} fillOpacity={0.8} />
+              <Cell key={i} fill={entry.impact >= 0 ? "var(--red)" : "var(--green)"} fillOpacity={0.85} />
             ))}
           </Bar>
         </BarChart>

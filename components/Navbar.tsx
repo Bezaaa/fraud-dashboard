@@ -16,7 +16,7 @@ export default function Navbar() {
   return (
     <header
       className="sticky top-0 z-50 backdrop-blur-md"
-      style={{ borderBottom: "1px solid var(--border)", background: "rgba(6,6,15,0.7)" }}
+      style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)", opacity: 0.97 }}
     >
       <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-6">
         {/* Logo */}
